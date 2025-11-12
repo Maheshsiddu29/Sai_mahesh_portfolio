@@ -1,11 +1,20 @@
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+
 export const About = () => {
+  const { elementRef, isVisible } = useScrollReveal();
+
   return (
     <section id="about" className="py-20 px-6">
       <div className="container mx-auto max-w-4xl">
         <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center text-gradient">
           About Me
         </h2>
-        <div className="glass p-8 md:p-12 rounded-2xl hover-lift">
+        <div
+          ref={elementRef}
+          className={`glass p-8 md:p-12 rounded-2xl hover-lift transition-all duration-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
           <p className="text-lg md:text-xl text-foreground/90 leading-relaxed mb-6">
             A results-oriented Staff Smart Contract Engineer and XR Solutions Architect specializing in blockchain security and full-stack development.
           </p>

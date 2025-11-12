@@ -1,4 +1,5 @@
 import { Briefcase, Calendar } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const experiences = [
   {
@@ -33,18 +34,22 @@ const experiences = [
 ];
 
 export const Experience = () => {
+  const { elementRef, isVisible } = useScrollReveal();
+
   return (
     <section id="experience" className="py-20 px-6">
       <div className="container mx-auto max-w-5xl">
         <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center text-gradient">
           Experience
         </h2>
-        <div className="space-y-8">
+        <div ref={elementRef} className="space-y-8">
           {experiences.map((exp, index) => (
             <div
               key={index}
-              className="glass p-8 rounded-2xl hover-lift animate-slide-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className={`glass p-8 rounded-2xl hover-lift transition-all duration-700 ${
+                isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+              }`}
+              style={{ transitionDelay: `${index * 0.2}s` }}
             >
               <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
                 <div className="flex items-start gap-3 mb-4 md:mb-0">

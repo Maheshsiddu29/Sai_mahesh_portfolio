@@ -1,5 +1,4 @@
-import { ExternalLink, Github } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const projects = [
   {
@@ -40,18 +39,22 @@ const projects = [
 ];
 
 export const Projects = () => {
+  const { elementRef, isVisible } = useScrollReveal();
+
   return (
     <section id="projects" className="py-20 px-6">
       <div className="container mx-auto max-w-6xl">
         <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center text-gradient">
           Featured Projects
         </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div ref={elementRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
             <div
               key={index}
-              className="glass p-6 rounded-2xl hover-lift animate-fade-in group"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className={`glass p-6 rounded-2xl hover-lift group transition-all duration-700 ${
+                isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+              }`}
+              style={{ transitionDelay: `${index * 0.15}s` }}
             >
               <div className="mb-4">
                 <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-gradient transition-all">

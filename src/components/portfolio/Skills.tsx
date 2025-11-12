@@ -1,3 +1,5 @@
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+
 const skillCategories = [
   {
     category: "Blockchain & Smart Contracts",
@@ -26,18 +28,22 @@ const skillCategories = [
 ];
 
 export const Skills = () => {
+  const { elementRef, isVisible } = useScrollReveal();
+
   return (
     <section id="skills" className="py-20 px-6">
       <div className="container mx-auto max-w-6xl">
         <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center text-gradient">
           Skills & Technologies
         </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div ref={elementRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skillCategories.map((category, index) => (
             <div
               key={index}
-              className="glass p-6 rounded-2xl hover-lift animate-fade-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className={`glass p-6 rounded-2xl hover-lift transition-all duration-700 ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
+              style={{ transitionDelay: `${index * 0.1}s` }}
             >
               <h3 className="text-xl font-bold text-primary mb-4">{category.category}</h3>
               <div className="flex flex-wrap gap-2">
